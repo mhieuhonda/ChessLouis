@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChessLouis — Cờ vua online, leo hạng, nhận danh hiệu</title>
+<meta name="description" content="Đấu cờ vua trực tuyến theo thời gian thực, leo bậc Elo và chinh phục danh hiệu từ Phàm Nhân đến Hư Vô Chi Chủ.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/animation.css">
+<link rel="stylesheet" href="css/button.css">
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo"><span class="crown">♔</span> ChessLouis</div>
+  <nav class="nav-links" id="nav-links">
+    <a href="pages/play.html">Chơi cờ</a>
+    <a href="pages/ranking.html">Xếp hạng</a>
+    <a href="pages/tournament.html">Giải đấu</a>
+    <a href="pages/history.html">Lịch sử</a>
+    <a href="pages/profile.html">Hồ sơ</a>
+    <a href="pages/admin.html" class="admin-link hidden" data-admin-only>Quản trị</a>
+  </nav>
+  <div class="nav-right">
+    <div id="nav-auth-slot"></div>
+    <button class="nav-toggle" id="nav-toggle">☰</button>
+  </div>
+</header>
+
+<section class="hero fade-up">
+  <span class="eyebrow">♟ Cờ vua trực tuyến thời gian thực</span>
+  <h1>Trở thành <span>kỳ thủ huyền thoại</span></h1>
+  <p>Đấu trí thật với người chơi thật. Leo bậc Elo, chinh phục danh hiệu, và khắc tên mình lên bảng xếp hạng ChessLouis.</p>
+  <div class="hero-actions">
+    <a class="btn btn-gold" href="pages/play.html">Bắt đầu chơi</a>
+    <a class="btn btn-ghost" href="pages/ranking.html">Xem bảng xếp hạng</a>
+  </div>
+  <div class="hero-board-deco" aria-hidden="true">
+    <div>♜</div><div>♞</div><div>♝</div><div>♛</div><div>♚</div><div>♝</div><div>♞</div><div>♜</div>
+    <div>♟</div><div>♟</div><div>♟</div><div>♟</div><div>♟</div><div>♟</div><div>♟</div><div>♟</div>
+    <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    <div>♙</div><div>♙</div><div>♙</div><div>♙</div><div>♙</div><div>♙</div><div>♙</div><div>♙</div>
+    <div>♖</div><div>♘</div><div>♗</div><div>♕</div><div>♔</div><div>♗</div><div>♘</div><div>♖</div>
+  </div>
+</section>
+
+<section class="features stagger">
+  <div>
+    <div class="f-icon">♟️</div>
+    <h3>Đấu cờ online</h3>
+    <p>Tạo phòng riêng hoặc vào phòng bạn bè, đồng bộ nước đi tức thời qua Firebase.</p>
+  </div>
+  <div>
+    <div class="f-icon">🏆</div>
+    <h3>Bảng xếp hạng</h3>
+    <p>Hệ thống Elo chuẩn, cạnh tranh vị trí top với cộng đồng kỳ thủ ChessLouis.</p>
+  </div>
+  <div>
+    <div class="f-icon">👑</div>
+    <h3>Danh hiệu</h3>
+    <p>Từ Phàm Nhân đến Hư Vô Chi Chủ — danh hiệu hiển thị ngay cạnh tên bạn.</p>
+  </div>
+  <div>
+    <div class="f-icon">⏱️</div>
+    <h3>Cờ chớp nhoáng</h3>
+    <p>Chọn thời gian thi đấu 5, 10 hay 15 phút, đồng hồ đếm ngược cho từng bên.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  © 2026 ChessLouis · Xây dựng bởi <a href="pages/profile.html">hieulouis</a>
+</footer>
+
+<div id="toast-root"></div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

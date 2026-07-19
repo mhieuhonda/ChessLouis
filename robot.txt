@@ -1,0 +1,5 @@
+# Lưu ý: tên file chuẩn mà công cụ tìm kiếm đọc là "robots.txt" (đã có sẵn ở thư mục gốc).
+# File này được giữ lại để tránh phá vỡ liên kết cũ, nội dung giống hệt robots.txt.
+User-agent: *
+Allow: /
+Sitemap: https://cheouis.web.app/sitemap.xml
