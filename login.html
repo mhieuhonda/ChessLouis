@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đăng nhập — ChessLouis</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/animation.css">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/login.css">
+</head>
+<body class="auth-body">
+
+<a class="back-home" href="../index.html" title="Về trang chủ">←</a>
+
+<div class="login-box">
+  <div class="logo">♔</div>
+  <h1>ChessLouis</h1>
+  <h2>Đăng nhập vào tài khoản</h2>
+
+  <form id="login-form">
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="ban@vidu.com" required autocomplete="email">
+    </div>
+    <div class="field">
+      <label for="password">Mật khẩu</label>
+      <input id="password" type="password" placeholder="••••••••" required autocomplete="current-password">
+    </div>
+    <div class="field-error" id="form-error"></div>
+    <button id="login-btn" type="submit">Đăng nhập</button>
+  </form>
+
+  <p>Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a></p>
+</div>
+
+<div id="toast-root"></div>
+
+<script type="module">
+import { login, translateAuthError } from "../js/auth.js";
+import { showError } from "../js/notification.js";
+import { redirectIfAuthed } from "../js/router.js";
+
+redirectIfAuthed("profile.html");
+
+const form = document.getElementById("login-form");
+const btn = document.getElementById("login-btn");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  btn.disabled = true;
+  btn.textContent = "Đang đăng nhập...";
+
+  try {
+    await login(email, password);
+    window.location.href = "profile.html";
+  } catch (error) {
+    const msg = translateAuthError(error);
+    document.getElementById("form-error").textContent = msg;
+    showError(msg);
+    btn.disabled = false;
+    btn.textContent = "Đăng nhập";
+  }
+});
+</script>
+</body>
+</html>

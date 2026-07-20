@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lịch sử đấu — ChessLouis</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/animation.css">
+<link rel="stylesheet" href="../css/button.css">
+<link rel="stylesheet" href="../css/navbar.css">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/profile.css">
+</head>
+<body class="profile-body">
+
+<header class="navbar">
+  <div class="logo"><span class="crown">♔</span> ChessLouis</div>
+  <nav class="nav-links" id="nav-links">
+    <a href="play.html">Chơi cờ</a>
+    <a href="ranking.html">Xếp hạng</a>
+    <a href="tournament.html">Giải đấu</a>
+    <a href="history.html" class="active">Lịch sử</a>
+    <a href="profile.html">Hồ sơ</a>
+    <a href="admin.html" class="admin-link hidden" data-admin-only>Quản trị</a>
+  </nav>
+  <div class="nav-right">
+    <div id="nav-auth-slot"></div>
+    <button class="nav-toggle" id="nav-toggle">☰</button>
+  </div>
+</header>
+
+<h1 class="page-title">Lịch sử đấu</h1>
+<p class="page-subtitle">Toàn bộ các ván bạn đã chơi trên ChessLouis</p>
+
+<div class="page-wrap" style="max-width:720px;">
+  <div class="info" style="margin-bottom:10px;">
+    <div class="stat-box"><div class="stat-label">Tổng số ván</div><div class="stat-value" id="h-total">0</div></div>
+    <div class="stat-box win"><div class="stat-label">Thắng</div><div class="stat-value" id="h-wins">0</div></div>
+    <div class="stat-box loss"><div class="stat-label">Thua</div><div class="stat-value" id="h-losses">0</div></div>
+    <div class="stat-box draw"><div class="stat-label">Hòa</div><div class="stat-value" id="h-draws">0</div></div>
+  </div>
+
+  <h2 class="section-title">Tất cả ván đấu</h2>
+  <div class="history-list" id="full-history-list">
+    <div class="loader-ring"></div>
+  </div>
+</div>
+
+<div id="toast-root"></div>
+<script type="module" src="../js/app.js"></script>
+<script type="module" src="../js/history.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quản trị — ChessLouis</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/animation.css">
+<link rel="stylesheet" href="../css/button.css">
+<link rel="stylesheet" href="../css/navbar.css">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+
+<header class="navbar">
+  <div class="logo"><span class="crown">♔</span> ChessLouis</div>
+  <nav class="nav-links" id="nav-links">
+    <a href="play.html">Chơi cờ</a>
+    <a href="ranking.html">Xếp hạng</a>
+    <a href="tournament.html">Giải đấu</a>
+    <a href="history.html">Lịch sử</a>
+    <a href="profile.html">Hồ sơ</a>
+    <a href="admin.html" class="admin-link active" data-admin-only>Quản trị</a>
+  </nav>
+  <div class="nav-right">
+    <div id="nav-auth-slot"></div>
+    <button class="nav-toggle" id="nav-toggle">☰</button>
+  </div>
+</header>
+
+<div class="admin-wrap">
+  <div class="admin-header">
+    <h1>👑 Bảng điều khiển</h1>
+    <span class="admin-pill">Nhà sáng lập</span>
+  </div>
+
+  <div class="admin-grid">
+    <div class="admin-stat"><div class="a-num" id="stat-total-users">-</div><div class="a-label">Tổng kỳ thủ</div></div>
+    <div class="admin-stat"><div class="a-num" id="stat-total-matches">-</div><div class="a-label">Ván đã đấu</div></div>
+    <div class="admin-stat"><div class="a-num" id="stat-avg-elo">-</div><div class="a-label">Elo trung bình</div></div>
+    <div class="admin-stat"><div class="a-num" id="stat-banned">-</div><div class="a-label">Tài khoản bị khóa</div></div>
+  </div>
+
+  <div class="admin-panel">
+    <h2>Quản lý kỳ thủ</h2>
+    <input class="admin-search" id="admin-search" placeholder="🔍 Tìm theo tên người chơi...">
+    <div id="user-list"><div class="loader-ring"></div></div>
+  </div>
+
+  <div class="admin-panel">
+    <h2>Tạo giải đấu mới</h2>
+    <form id="create-tournament-form">
+      <div class="field">
+        <label for="t-name">Tên giải đấu</label>
+        <input id="t-name" type="text" placeholder="VD: ChessLouis Cup Mùa Hè" required>
+      </div>
+      <div class="field">
+        <label for="t-date">Ngày diễn ra</label>
+        <input id="t-date" type="datetime-local" required>
+      </div>
+      <div class="field">
+        <label for="t-max">Số người tối đa</label>
+        <input id="t-max" type="number" value="16" min="2" max="256">
+      </div>
+      <button class="btn btn-gold btn-block" style="margin-top:14px;" type="submit">Tạo giải đấu</button>
+    </form>
+  </div>
+
+  <div class="admin-panel">
+    <h2>Giải đấu hiện có</h2>
+    <div id="tournament-list"><div class="loader-ring"></div></div>
+  </div>
+</div>
+
+<div id="toast-root"></div>
+<script type="module" src="../js/app.js"></script>
+<script type="module" src="../js/admin.js"></script>
+</body>
+</html>

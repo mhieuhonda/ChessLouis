@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cài đặt — ChessLouis</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="stylesheet" href="../css/variables.css">
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/animation.css">
+<link rel="stylesheet" href="../css/button.css">
+<link rel="stylesheet" href="../css/navbar.css">
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/login.css">
+<link rel="stylesheet" href="../css/profile.css">
+</head>
+<body class="profile-body">
+
+<header class="navbar">
+  <div class="logo"><span class="crown">♔</span> ChessLouis</div>
+  <nav class="nav-links" id="nav-links">
+    <a href="play.html">Chơi cờ</a>
+    <a href="ranking.html">Xếp hạng</a>
+    <a href="tournament.html">Giải đấu</a>
+    <a href="history.html">Lịch sử</a>
+    <a href="profile.html">Hồ sơ</a>
+    <a href="admin.html" class="admin-link hidden" data-admin-only>Quản trị</a>
+  </nav>
+  <div class="nav-right">
+    <div id="nav-auth-slot"></div>
+    <button class="nav-toggle" id="nav-toggle">☰</button>
+  </div>
+</header>
+
+<h1 class="page-title">Cài đặt tài khoản</h1>
+
+<div class="page-wrap" style="max-width:460px;">
+  <div class="lobby-card" style="text-align:left;">
+    <h3 style="text-align:center;margin-bottom:14px;">Thông tin</h3>
+    <p style="color:var(--text-dim);font-size:14px;margin:6px 0;">Tên người chơi: <b id="settings-username" style="color:var(--gold-soft);">-</b></p>
+    <p style="color:var(--text-dim);font-size:14px;margin:6px 0;">Email: <b id="settings-email" style="color:var(--text);">-</b></p>
+    <p style="color:var(--text-dim);font-size:14px;margin:6px 0;">Elo hiện tại: <b id="settings-elo" style="color:var(--gold-soft);">-</b></p>
+  </div>
+
+  <div class="lobby-card" style="text-align:left;">
+    <h3 style="text-align:center;margin-bottom:14px;">Đổi mật khẩu</h3>
+    <form id="change-password-form">
+      <div class="field">
+        <label for="current-password">Mật khẩu hiện tại</label>
+        <input id="current-password" type="password" required autocomplete="current-password">
+      </div>
+      <div class="field">
+        <label for="new-password">Mật khẩu mới</label>
+        <input id="new-password" type="password" required minlength="6" autocomplete="new-password">
+      </div>
+      <button class="btn btn-gold btn-block" style="margin-top:16px;" type="submit">Cập nhật mật khẩu</button>
+    </form>
+  </div>
+
+  <button class="btn btn-danger btn-block" id="logout-settings-btn">Đăng xuất</button>
+</div>
+
+<div id="toast-root"></div>
+<script type="module" src="../js/app.js"></script>
+<script type="module" src="../js/settings.js"></script>
+</body>
+</html>
