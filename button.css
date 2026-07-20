@@ -1,0 +1,55 @@
+/* ChessLouis — Nút bấm dùng chung */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:13px 26px;
+  border-radius:var(--r-full);
+  font-family:var(--font-body);
+  font-weight:700;
+  font-size:15px;
+  letter-spacing:.2px;
+  border:1px solid transparent;
+  transition:transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease), background var(--fast) var(--ease), opacity var(--fast) var(--ease);
+  white-space:nowrap;
+}
+.btn:active{ transform:scale(.96); }
+
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold),#eab308);
+  color:var(--bg-void);
+  box-shadow:0 8px 20px rgba(250,204,21,.25);
+}
+.btn-gold:hover{ transform:translateY(-2px); box-shadow:0 10px 26px rgba(250,204,21,.4); }
+
+.btn-ghost{
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  border-color:var(--border-soft);
+}
+.btn-ghost:hover{ background:rgba(255,255,255,.1); border-color:var(--border-gold); }
+
+.btn-danger{
+  background:rgba(244,63,94,.12);
+  color:#fecdd3;
+  border-color:rgba(244,63,94,.35);
+}
+.btn-danger:hover{ background:rgba(244,63,94,.22); }
+
+.btn-sm{ padding:9px 18px; font-size:13px; }
+.btn-block{ width:100%; }
+.btn:disabled{ opacity:.5; cursor:not-allowed; transform:none !important; }
+
+.icon-btn{
+  width:42px; height:42px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:var(--r-full);
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border-soft);
+  font-size:18px;
+  transition:background var(--fast), border-color var(--fast), transform var(--fast);
+}
+.icon-btn:hover{ background:rgba(255,255,255,.12); border-color:var(--border-gold); transform:translateY(-1px); }

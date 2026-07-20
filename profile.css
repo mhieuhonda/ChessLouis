@@ -1,0 +1,144 @@
+/* ChessLouis — Trang hồ sơ */
+body.profile-body{
+  background:
+    radial-gradient(circle at 20% -10%, rgba(250,204,21,.12), transparent 40%),
+    linear-gradient(135deg,var(--bg-void),#0f172a);
+}
+.page-wrap{
+  max-width:960px;
+  margin:0 auto;
+  padding:32px 20px 80px;
+}
+.profile-card{
+  position:relative;
+  background:var(--bg-card);
+  border:1px solid var(--border-soft);
+  border-radius:var(--r-lg);
+  padding:40px 30px 30px;
+  text-align:center;
+  box-shadow:var(--shadow-card);
+  overflow:hidden;
+}
+.profile-card::before{
+  content:"";
+  position:absolute; inset:0 0 auto 0; height:120px;
+  background:linear-gradient(180deg,rgba(250,204,21,.18),transparent);
+  pointer-events:none;
+}
+.avatar-wrap{
+  position:relative;
+  width:120px; height:120px;
+  margin:0 auto 16px;
+}
+#avatar,.avatar-lg{
+  width:120px; height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid var(--gold);
+  box-shadow:0 0 0 6px rgba(250,204,21,.12), var(--shadow-gold);
+  background:var(--bg-panel);
+  display:flex; align-items:center; justify-content:center;
+  font-size:52px;
+}
+.role-ring{
+  position:absolute; inset:-6px;
+  border-radius:50%;
+  border:2px dashed var(--imperial);
+  animation:ringSpin 12s linear infinite;
+}
+#username{
+  font-family:var(--font-display);
+  font-size:30px;
+  color:var(--gold);
+  margin-top:4px;
+}
+.badge-row{
+  display:flex; align-items:center; justify-content:center;
+  gap:8px; flex-wrap:wrap;
+  margin:10px 0 4px;
+}
+.title-badge{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:6px 16px;
+  border-radius:var(--r-full);
+  font-size:13.5px; font-weight:700;
+  background:rgba(250,204,21,.12);
+  color:var(--gold-soft);
+  border:1px solid var(--border-gold);
+}
+.title-badge.founder{
+  background:linear-gradient(120deg,rgba(192,132,252,.22),rgba(126,34,206,.22));
+  color:#e9d5ff;
+  border-color:rgba(192,132,252,.5);
+  box-shadow:0 0 22px rgba(192,132,252,.25);
+}
+.rank-name{ color:var(--text-dim); font-size:14px; margin-bottom:18px; }
+
+.info{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+.stat-box{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border-soft);
+  border-radius:var(--r-md);
+  padding:16px 8px;
+}
+.stat-box .stat-label{ font-size:12px; color:var(--text-dim); margin-bottom:4px; }
+.stat-box .stat-value{ font-size:22px; font-weight:800; }
+.stat-box.win .stat-value{ color:var(--emerald); }
+.stat-box.loss .stat-value{ color:var(--ruby); }
+.stat-box.draw .stat-value{ color:var(--gold-soft); }
+
+.profile-actions{
+  display:flex; gap:12px; justify-content:center; margin-top:26px; flex-wrap:wrap;
+}
+
+.section-title{
+  font-family:var(--font-display);
+  color:var(--gold);
+  font-size:20px;
+  margin:36px 0 14px;
+  display:flex; align-items:center; gap:10px;
+}
+.section-title::after{
+  content:""; flex:1; height:1px;
+  background:linear-gradient(90deg,var(--border-gold),transparent);
+}
+
+.history-list{ display:flex; flex-direction:column; gap:10px; }
+.history-row{
+  display:flex; align-items:center; justify-content:space-between;
+  background:var(--bg-card);
+  border:1px solid var(--border-soft);
+  border-left:4px solid var(--text-faint);
+  border-radius:var(--r-sm);
+  padding:14px 18px;
+  font-size:14px;
+}
+.history-row.win{ border-left-color:var(--emerald); }
+.history-row.loss{ border-left-color:var(--ruby); }
+.history-row.draw{ border-left-color:var(--gold); }
+.history-row .h-opp{ font-weight:700; }
+.history-row .h-result{ font-weight:800; text-transform:uppercase; font-size:12px; letter-spacing:.5px; }
+.history-row.win .h-result{ color:var(--emerald); }
+.history-row.loss .h-result{ color:var(--ruby); }
+.history-row.draw .h-result{ color:var(--gold-soft); }
+.history-row .h-delta{ font-variant-numeric:tabular-nums; }
+.empty-note{ color:var(--text-dim); font-size:14px; text-align:center; padding:24px; }
+
+@media(max-width:600px){
+  .info{ grid-template-columns:repeat(2,1fr); }
+  .history-row{ flex-wrap:wrap; gap:6px; }
+}
+
+#avatar-picker button{
+  width:52px; height:52px; font-size:26px;
+  border-radius:var(--r-md);
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border-soft);
+  transition:border-color var(--fast), background var(--fast), transform var(--fast);
+}
+#avatar-picker button:hover{ border-color:var(--gold); background:rgba(250,204,21,.1); transform:translateY(-2px); }

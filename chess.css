@@ -1,0 +1,202 @@
+/* ChessLouis — Bàn cờ & phòng chơi */
+body.play-body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(250,204,21,.10), transparent 45%),
+    linear-gradient(135deg,#020617,#111827);
+  padding-bottom:40px;
+}
+
+.game{
+  max-width:480px;
+  margin:0 auto;
+  padding:20px 16px;
+  text-align:center;
+}
+.game h1{
+  font-family:var(--font-display);
+  color:var(--gold);
+  font-size:26px;
+  margin-bottom:16px;
+}
+
+/* ===== LOBBY (trước khi vào ván) ===== */
+.lobby-card{
+  background:var(--bg-card);
+  border:1px solid var(--border-soft);
+  border-radius:var(--r-lg);
+  padding:26px 22px;
+  margin-bottom:18px;
+}
+.lobby-card h3{ font-family:var(--font-display); color:var(--gold); margin-bottom:6px; font-size:19px; }
+.lobby-card p{ color:var(--text-dim); font-size:14px; margin-bottom:18px; }
+.time-control-row{ display:flex; gap:8px; justify-content:center; margin-bottom:18px; flex-wrap:wrap; }
+.tc-btn{
+  padding:9px 16px; border-radius:var(--r-full);
+  border:1px solid var(--border-soft); background:rgba(255,255,255,.05);
+  font-size:13.5px; font-weight:700;
+}
+.tc-btn.active{ background:var(--gold); color:var(--bg-void); border-color:var(--gold); }
+.room-code-share{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  background:rgba(255,255,255,.05); border:1px dashed var(--border-gold);
+  border-radius:var(--r-sm); padding:12px 16px; margin:14px 0; font-size:14px;
+}
+.room-code-share b{ letter-spacing:3px; color:var(--gold); font-size:18px; }
+.room join-row{ display:flex; gap:8px; }
+.join-row{ display:flex; gap:8px; }
+.join-row input{
+  flex:1; padding:13px 14px; border-radius:var(--r-sm);
+  border:1px solid var(--border-soft); background:rgba(255,255,255,.05); color:var(--text);
+  text-transform:uppercase; letter-spacing:2px; text-align:center;
+}
+.waiting-note{ display:flex; align-items:center; gap:10px; justify-content:center; color:var(--text-dim); font-size:14px; margin-top:10px; }
+.spinner-sm{ width:16px; height:16px; border-radius:50%; border:2px solid rgba(250,204,21,.25); border-top-color:var(--gold); animation:ringSpin .7s linear infinite; }
+
+/* ===== NGƯỜI CHƠI ===== */
+.player{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:var(--bg-panel);
+  padding:12px 16px;
+  border-radius:var(--r-md);
+  margin:8px 0;
+  box-shadow:0 0 15px rgba(0,0,0,0.35);
+  border:1px solid var(--border-soft);
+  transition:border-color var(--fast), box-shadow var(--fast);
+}
+.player.turn-active{ border-color:var(--border-gold); box-shadow:0 0 22px rgba(250,204,21,.18); }
+.player .p-info{ display:flex; align-items:center; gap:10px; text-align:left; }
+.avatar{
+  width:44px; height:44px;
+  border-radius:50%;
+  background:var(--gold);
+  color:var(--bg-void);
+  display:flex; justify-content:center; align-items:center;
+  font-size:22px; flex-shrink:0;
+}
+.player h3{ margin:0; color:var(--gold); font-size:15px; }
+.player .p-title{ font-size:10.5px; color:var(--text-dim); }
+.player .p-title.founder{ color:var(--imperial); }
+.player p.p-elo{ margin:2px 0 0; font-size:12.5px; color:var(--text-dim); }
+.clock{
+  background:var(--bg-void);
+  padding:8px 15px;
+  border-radius:var(--r-sm);
+  font-weight:800;
+  color:var(--gold);
+  font-size:17px;
+  font-variant-numeric:tabular-nums;
+  min-width:64px;
+}
+.clock.low{ color:var(--ruby); animation:glowPulse 1s infinite; }
+
+#turn{
+  color:var(--gold);
+  font-size:15px;
+  font-weight:700;
+  margin:10px 0;
+  padding:8px;
+  background:rgba(250,204,21,.07);
+  border-radius:var(--r-full);
+}
+
+/* ===== BÀN CỜ ===== */
+#board{
+  width:min(420px,92vw);
+  aspect-ratio:1;
+  margin:14px auto;
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  border:6px solid var(--gold);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:var(--shadow-gold);
+}
+.square{
+  position:relative;
+  display:flex; justify-content:center; align-items:center;
+  font-size:clamp(24px,7vw,38px);
+  cursor:pointer;
+  user-select:none;
+  transition:filter .15s;
+}
+.square.white{ background:#f0d9b5; }
+.square.black{ background:#b58863; }
+.square:hover{ filter:brightness(1.15); }
+.square.selected{ box-shadow:inset 0 0 0 4px var(--gold); }
+.square.possible::after{
+  content:"";
+  width:28%; height:28%;
+  border-radius:50%;
+  background:rgba(34,197,94,.55);
+  position:absolute;
+}
+.square.possible.capture::after{
+  width:88%; height:88%;
+  background:transparent;
+  box-shadow:inset 0 0 0 5px rgba(34,197,94,.65);
+}
+.square.last-move{ box-shadow:inset 0 0 0 3px rgba(250,204,21,.7); }
+.square.in-check{ animation:checkPulse 1s infinite; }
+.square:active{ transform:scale(0.97); }
+
+/* ===== KHU ĐIỀU KHIỂN ===== */
+.controls, .room{ display:flex; gap:10px; justify-content:center; margin:14px 0; flex-wrap:wrap; }
+
+/* ===== KHUNG PHONG CẤP (PROMOTION) ===== */
+.promo-modal{
+  position:fixed; inset:0; background:rgba(2,6,23,.7);
+  display:flex; align-items:center; justify-content:center; z-index:200;
+}
+.promo-box{
+  background:var(--bg-panel); border:1px solid var(--border-gold);
+  border-radius:var(--r-lg); padding:20px; text-align:center;
+}
+.promo-box p{ color:var(--text-dim); margin-bottom:12px; font-size:14px; }
+.promo-choices{ display:flex; gap:10px; }
+.promo-choices button{
+  width:56px; height:56px; font-size:32px; border-radius:var(--r-sm);
+  background:rgba(255,255,255,.06); border:1px solid var(--border-soft);
+}
+.promo-choices button:hover{ border-color:var(--gold); background:rgba(250,204,21,.1); }
+
+/* ===== KẾT THÚC VÁN ===== */
+.result-modal{
+  position:fixed; inset:0; background:rgba(2,6,23,.8);
+  display:flex; align-items:center; justify-content:center; z-index:200;
+  padding:20px;
+}
+.result-box{
+  background:var(--bg-panel); border:1px solid var(--border-gold);
+  border-radius:var(--r-lg); padding:34px 28px; text-align:center; max-width:340px;
+  animation:scaleIn var(--normal) var(--ease) both;
+}
+.result-box .r-icon{ font-size:44px; margin-bottom:8px; }
+.result-box h2{ font-family:var(--font-display); font-size:24px; color:var(--gold); margin-bottom:6px; }
+.result-box .r-elo{ font-size:14px; color:var(--text-dim); margin-bottom:20px; }
+.result-box .r-elo b{ color:var(--emerald); }
+.result-box .r-elo b.neg{ color:var(--ruby); }
+
+/* ===== TRÒ CHUYỆN ===== */
+.chat-box{
+  background:var(--bg-card); border:1px solid var(--border-soft);
+  border-radius:var(--r-md); margin-top:16px; text-align:left; overflow:hidden;
+}
+.chat-messages{
+  height:150px; overflow-y:auto; padding:10px 14px; display:flex; flex-direction:column; gap:6px;
+}
+.chat-msg{ font-size:13px; }
+.chat-msg .cm-name{ color:var(--gold-soft); font-weight:700; }
+.chat-msg.me .cm-name{ color:var(--emerald); }
+.chat-input-row{ display:flex; border-top:1px solid var(--border-soft); }
+.chat-input-row input{
+  flex:1; padding:11px 14px; background:transparent; border:none; color:var(--text); font-size:13.5px;
+}
+.chat-input-row button{ padding:0 18px; color:var(--gold); font-weight:700; }
+
+@media(max-width:500px){
+  .promo-choices button{ width:46px; height:46px; font-size:26px; }
+}

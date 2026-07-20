@@ -1,0 +1,93 @@
+/* ChessLouis — Thanh điều hướng */
+.navbar{
+  position:sticky; top:0; z-index:100;
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:0 clamp(16px,4vw,40px);
+  background:rgba(2,6,23,.72);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border-soft);
+}
+.navbar .logo{
+  font-family:var(--font-display);
+  font-size:22px;
+  font-weight:700;
+  color:var(--gold);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  letter-spacing:.3px;
+}
+.navbar .logo .crown{ animation:crownFloat 4s ease-in-out infinite; display:inline-block; }
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.nav-links a{
+  padding:10px 16px;
+  border-radius:var(--r-full);
+  font-size:14.5px;
+  font-weight:600;
+  color:var(--text-dim);
+  transition:color var(--fast), background var(--fast);
+}
+.nav-links a:hover{ color:var(--text); background:rgba(255,255,255,.06); }
+.nav-links a.active{ color:var(--bg-void); background:var(--gold); }
+.nav-links a.admin-link{ color:var(--imperial); }
+.nav-links a.admin-link:hover{ background:rgba(192,132,252,.14); }
+
+.nav-right{ display:flex; align-items:center; gap:12px; }
+
+.nav-user{
+  display:flex; align-items:center; gap:10px;
+  padding:6px 14px 6px 6px;
+  border-radius:var(--r-full);
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--border-soft);
+  transition:border-color var(--fast), background var(--fast);
+}
+.nav-user:hover{ border-color:var(--border-gold); }
+.nav-user .avatar-sm{
+  width:32px; height:32px; border-radius:50%;
+  background:var(--gold); color:var(--bg-void);
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; font-weight:700; overflow:hidden;
+  object-fit:cover;
+}
+.nav-user .nav-user-name{ font-size:13.5px; font-weight:700; line-height:1.15; }
+.nav-user .nav-user-title{ font-size:11px; color:var(--gold-soft); line-height:1.2; }
+
+.nav-toggle{
+  display:none;
+  width:42px; height:42px;
+  border-radius:var(--r-full);
+  align-items:center; justify-content:center;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border-soft);
+  font-size:20px;
+}
+
+/* Menu di động */
+@media (max-width:880px){
+  .nav-toggle{ display:flex; }
+  .nav-links{
+    position:fixed; inset:72px 0 0 0;
+    flex-direction:column;
+    align-items:stretch;
+    gap:4px;
+    padding:18px;
+    background:var(--bg-void);
+    transform:translateX(100%);
+    transition:transform var(--normal) var(--ease);
+    overflow-y:auto;
+  }
+  .nav-links.open{ transform:translateX(0); }
+  .nav-links a{ text-align:center; padding:14px; font-size:16px; }
+  .nav-right .nav-user-title{ display:none; }
+}
