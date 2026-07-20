@@ -1,0 +1,73 @@
+rules_version = '2';
+
+// ChessLouis — Firestore Security Rules
+// Cách dùng: dán nội dung này vào Firebase Console → Firestore Database → Rules
+// (hoặc copy vào firestore.rules và deploy bằng `firebase deploy --only firestore:rules`)
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Kiểm tra người dùng hiện tại có phải Nhà sáng lập / quản trị viên không
+    function isAdmin() {
+      return request.auth != null &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.username == "hieulouis";
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // ===== Người dùng =====
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && request.auth.uid == userId;
+      // Người dùng có thể tự sửa hồ sơ của mình (avatar...), nhưng KHÔNG được tự đổi elo/wins/losses/role/banned.
+      // Quản trị viên được sửa mọi trường (khóa tài khoản, reset elo...).
+      allow update: if isAdmin() || (
+        isSignedIn() && request.auth.uid == userId &&
+        request.resource.data.elo == resource.data.elo &&
+        request.resource.data.role == resource.data.role &&
+        request.resource.data.banned == resource.data.banned
+      );
+      allow delete: if isAdmin();
+    }
+
+    // ===== Phòng chơi =====
+    match /rooms/{roomId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && request.resource.data.hostUid == request.auth.uid;
+      allow update: if isSignedIn() && (
+        resource.data.hostUid == request.auth.uid ||
+        resource.data.guestUid == request.auth.uid ||
+        (resource.data.guestUid == null && request.resource.data.guestUid == request.auth.uid)
+      );
+      allow delete: if isAdmin();
+
+      // Trò chuyện trong phòng
+      match /messages/{messageId} {
+        allow read: if isSignedIn();
+        allow create: if isSignedIn() && request.resource.data.uid == request.auth.uid;
+        allow update, delete: if isAdmin();
+      }
+    }
+
+    // ===== Lịch sử ván đấu =====
+    match /matches/{matchId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() &&
+        (request.resource.data.player1Uid == request.auth.uid || request.resource.data.player2Uid == request.auth.uid);
+      allow update, delete: if isAdmin();
+    }
+
+    // ===== Giải đấu =====
+    match /tournaments/{tournamentId} {
+      allow read: if isSignedIn();
+      allow create, delete: if isAdmin();
+      // Cho phép người chơi tự đăng ký/rời (chỉ đụng tới participants), admin sửa mọi trường
+      allow update: if isAdmin() || (
+        isSignedIn() &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(["participants"])
+      );
+    }
+  }
+}
